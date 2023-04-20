@@ -6,6 +6,9 @@ def import_or_install(package):  #function to check if module is installed or no
         if package=="SpeechRecognition":
             import speech_recognition
             return
+        if package=="gTTS":
+            import gtts
+            return
         if package == "pygame":
             os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
         __import__(package)
@@ -14,16 +17,18 @@ def import_or_install(package):  #function to check if module is installed or no
         import subprocess
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
         __import__(package)
-import_or_install("pyttsx3")        #
+# import_or_install("pyttsx3")        #
 import_or_install("pygame")         #
 import_or_install("io")             #  use of above function
 import_or_install("SpeechRecognition")  #
-import_or_install("pyaudio")            #
+# import_or_install("pyaudio")            #
+import_or_install("gTTS")
 import pyttsx3              #reimport pyttsx3 for text to speech
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"  #for hiding pygame welcome text
 import pygame       #importing pygame for audio playback
 from io import BytesIO  #importing bytesIO for creating object like files
 import speech_recognition as sr #google speech recognition api
+from gtts import gTTS
 responses = {                                                   #dictionary for voice feedback
     "hello": "Hi there! I am Byte",
     "hi": "Hi there! I am Byte",
@@ -41,16 +46,6 @@ def res(user_i):
             return responses[user_i]
         else:
             return user_i
-def generate(text):
-        print("Bot : "+text)
-        engine =pyttsx3.init()
-        engine.setProperty('rate',180)
-        engine.setProperty('voice','HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enIN_RaviM')
-        engine.say(text)
-        engine.runAndWait()
-        # tts = gTTS(res(text))
-        
-        # tts.write_to_fp(aout)
 def speak(tospeak):
         if type(tospeak)==BytesIO :
             tospeak.seek(0)
@@ -59,9 +54,22 @@ def speak(tospeak):
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy():
             continue
+def generate(text):
+        print("Bot : "+text)
+        # engine =pyttsx3.init()
+        # engine.setProperty('rate',180)
+        # engine.setProperty('voice','HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_enIN_RaviM')
+        # engine.say(text)
+        # engine.runAndWait()
+        aout = BytesIO()
+        tts = gTTS(res(text),lang='ta',tld='co.in')
+        
+        tts.write_to_fp(aout)
+        speak(aout)
+
 aout = BytesIO()
 generate("Hi this is Byte")
-
+# speak(aout)
 while True:
     aout = BytesIO()
     # print(type(aout))
