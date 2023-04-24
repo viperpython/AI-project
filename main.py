@@ -50,8 +50,8 @@ import_or_install("io")             #  use of above function
 import_or_install("SpeechRecognition")  #
 # import_or_install("pyaudio")            #
 import_or_install("gTTS")
-import_or_install("word2number")
-import pyttsx3              #reimport pyttsx3 for text to speech
+0# import_or_install("word2number")
+# import pyttsx3              #reimport pyttsx3 for text to speech
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"  #for hiding pygame welcome text
 import pygame       #importing pygame for audio playback
 from io import BytesIO  #importing bytesIO for creating object like files
@@ -81,7 +81,9 @@ def speak(tospeak):
             tospeak.seek(0)
         pygame.mixer.init()
         pygame.mixer.music.load(tospeak)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(
+            
+        )
         while pygame.mixer.music.get_busy():
             continue
 def generate(text):
