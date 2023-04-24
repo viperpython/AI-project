@@ -6,41 +6,28 @@ data = [
     [34, 8000],
     [25, 8500],
     [48, 9000],
-    [61, 9500],
+    [61, 95000],
     [76, 10000],
-    [43, 10500],
+    [36, 105000],
     [19, 11000],
     [52, 11500],
-    [27, 12000],                      #
+    [27, 120000],                      #train data
     [69, 12500],
     [32, 13000],
     [44, 14500],
     [59, 13500],
     [12, 12000],
     [39, 15000],
-    [70, 16000],
-    [23, 17500],
+    [70, 160000],
+    [23, 50500],
     [80, 14000],
     [36, 11200],
     [50, 14000]
 ]
 dict ={0:"google cardboard",1:"samsung vr",2:"htc vr",3:"P S V R",4:"Oculus Quest"}
-y_train =[0, 0, 0, 1, 1, 1, 2, 2, 2, 3,3, 3, 4, 4,3,2,1,2,4,1]
+y_train =[0, 0, 0, 2, 0, 4, 2, 1, 4, 0,2, 1, 0, 3,3,2,3,0,1,1] #inference data
 clf = DecisionTreeClassifier()
 clf.fit(data, y_train)
-
-# Make predictions on new data
-# X_test = []
-# t=int(input())
-# l1=[0,0]
-# l1[0]=int(input())
-# l1[1]=int(input())
-# # l1[2]=int(input())
-# X_test.append(l1)
-    
-# y_pred = clf.predict(X_test)
-# print(dict[y_pred[0]])
-# from time import sleep
 def import_or_install(package):  #function to check if module is installed or not installs module if not installed
     try:
         if package=="SpeechRecognition":
